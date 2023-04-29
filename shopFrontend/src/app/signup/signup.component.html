@@ -1,0 +1,123 @@
+<div class="account section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <div class="login-form border p-5">
+          <div class="text-center heading">
+            <h2 class="mb-2">Sign Up</h2>
+            <p class="lead">
+              Already have an account? <a routerLink="/login"> Login now</a>
+            </p>
+          </div>
+
+          <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+            <div class="form-group mb-4">
+              <label for="email">Email Address</label>
+              <input
+                type="email"
+                class="form-control"
+                placeholder="Enter your email address"
+                formControlName="email"
+              />
+              <div
+                *ngIf="
+                  signupForm.get('email')?.invalid &&
+                  signupForm.get('email')?.touched
+                "
+              >
+                <small class="form-text text-danger"
+                  >Please enter a valid email address</small
+                >
+              </div>
+            </div>
+            <div class="form-group mb-4">
+              <label for="firstname">Firstname</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter your first name"
+                formControlName="firstname"
+              />
+              <div
+                *ngIf="
+                  signupForm.get('firstname')?.invalid &&
+                  signupForm.get('firstname')?.touched
+                "
+              >
+                <small class="form-text text-danger"
+                  >Please enter your first name</small
+                >
+              </div>
+            </div>
+            <div class="form-group mb-4">
+              <label for="lastname">Lastname</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter your last name"
+                formControlName="lastname"
+              />
+              <div
+                *ngIf="
+                  signupForm.get('lastname')?.invalid &&
+                  signupForm.get('lastname')?.touched
+                "
+              >
+                <small class="form-text text-danger"
+                  >Please enter your last name</small
+                >
+              </div>
+            </div>
+            <div class="form-group mb-4">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                placeholder="Enter Password"
+                formControlName="password"
+              />
+              <div
+                *ngIf="
+                  signupForm.get('password')?.invalid &&
+                  signupForm.get('password')?.touched
+                "
+              >
+                <small class="form-text text-danger"
+                  >Please enter your password</small
+                >
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="confirmPassword">Confirm Password</label>
+              <input
+                type="password"
+                class="form-control"
+                placeholder="Confirm Password"
+                formControlName="confirmPassword"
+              />
+              <div
+                *ngIf="
+                  signupForm.get('confirmPassword')?.invalid &&
+                  signupForm.get('confirmPassword')?.touched
+                "
+              >
+                <small class="form-text text-danger"
+                  >Please confirm your password</small
+                >
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              class="btn btn-main mt-3 btn-block"
+              [disabled]="!signupForm.valid"
+            >
+              Signup
+            </button>
+            <a class="float-right" href="">Forget password?</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
