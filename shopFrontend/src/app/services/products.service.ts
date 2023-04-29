@@ -10,6 +10,7 @@ import { catchError, map } from 'rxjs/operators';
 })
 export class ProductsService {
 
+  constructor(private httpClient: HttpClient) { }
   private baseUrl='http://localhost:8888/api/products/all';
   
   getProducts(): Observable<Product[]> {
@@ -22,8 +23,47 @@ export class ProductsService {
         })
       );
   }
+  private baseUrl1='http://localhost:8888/api/products/popular';
+  getProductsPopular(): Observable<Product[]> {
+    const url = `${this.baseUrl1}`;
+    return this.httpClient.get<Product[]>(url)
+      .pipe(
+        catchError((error) => {
+          console.log(error);
+          throw error;
+        })
+      );
+  }
+  private baseUrl2='http://localhost:8888/api/products/latest';
+  getProductsNewest(): Observable<Product[]> {
+    const url = `${this.baseUrl2}`;
+    return this.httpClient.get<Product[]>(url)
+      .pipe(
+        catchError((error) => {
+          console.log(error);
+          throw error;
+        })
+      );
+  }
+  private categories='http://localhost:8888/api/products/categories';
+  getCategoriesFromProduct(): Observable<String[]> {
+    const url = `${this.categories}`;
+    return this.httpClient.get<String[]>(url)
+      .pipe(
+        catchError((error) => {
+          console.log(error);
+          throw error;
+        })
+      );
+  }
+
+  private productUrl='http://localhost:8888/api/products';
+  getProduct(theProductId: number): Observable<Product> {
+    // need to build a url based on product id
+    const productUrl = `${this.productUrl}/${theProductId}`;
+    return this.httpClient.get<Product>(productUrl);
+  }
   
-  constructor(private httpClient: HttpClient) { }
 }
 
 export class Product {
@@ -38,6 +78,7 @@ export class Product {
   unitsInStock?: number
   dateCreated?: string
   lastUpdated?: string
+  category?: string[]
   images?: Image[]
   sizes?: Size[]
 }
@@ -51,4 +92,5 @@ export class Size {
   id?: number
   size?: string
 }
+
 

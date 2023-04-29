@@ -15,8 +15,8 @@
         <div class="col-lg-3 col-12 col-md-6 col-sm-6 mb-5" *ngFor="let product of products">
             <div class="product">
               <div class="product-wrap" >
-                  <a routerLink="/product-single"><img class="img-fluid w-100 mb-3 img-first" src="{{product.images && product.images[0]?.imageName}}" alt="{{product.name}}" /></a>
-                  <a routerLink="/product-single"><img class="img-fluid w-100 mb-3 img-second" src="{{product.images && product.images[1]?.imageName}}" alt="{{product.name}}" /></a>
+                  <a routerLink="/product-single/{{product.id}}"><img class="img-fluid w-100 mb-3 img-first" src="{{product.images && product.images[0]?.imageName}}" alt="{{product.name}}" /></a>
+                  <a routerLink="/product-single/{{product.id}}"><img class="img-fluid w-100 mb-3 img-second" src="{{product.images && product.images[1]?.imageName}}" alt="{{product.name}}" /></a>
               </div>
   
               <span class="onsale">Sale</span>
@@ -26,7 +26,7 @@
                 </div>
   
               <div class="product-info">
-                  <h2 class="product-title h5 mb-0"><a href="#">{{product.name}}</a></h2>
+                  <h2 class="product-title h5 mb-0"><a href="/product-single/{{product.id}}">{{product.name}}</a></h2>
                   <span class="price">
                       {{product.salesPrice|currency:'USD'}}
                   </span>

@@ -116,7 +116,7 @@ a:hover {
 }
 
 .navbar-toggle .icon-bar {
-  background: #fb5c42;
+  background: #444444;
 }
 
 input[type="email"],
@@ -1669,7 +1669,7 @@ a.text-primary:hover {
 }
 
 .text-color {
-  color: #fb5c42;
+  color: #444444;
 }
 
 .feature {
@@ -1791,7 +1791,7 @@ a.text-primary:hover {
 
 .ads {
   background: rgba(252, 114, 104, 0.06);
-  background: url("../images/counter.jpg") no-repeat;
+  background: url("../images/counter.png") no-repeat;
   background-size: cover;
   position: relative;
 }
