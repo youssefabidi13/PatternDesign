@@ -1,4 +1,4 @@
-package com.youssefabidi.ecommerce.thread;
+package com.youssefabidi.ecommerce.iterator;
 
 import com.youssefabidi.ecommerce.iterator.IIterator;
 

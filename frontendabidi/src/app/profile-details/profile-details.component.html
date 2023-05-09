@@ -1,0 +1,111 @@
+  
+  <section class="user-dashboard page-wrapper">
+    <div class="container">
+      <div class="row">
+          <div class="col-12 col-md-5 col-sm-12 col-lg-3">
+              <!-- <div class="nav flex-column nav-pills">
+                  <a class="nav-link" routerLink="/dashboard" >Dashboard</a>
+              </div>
+              <div class="nav flex-column nav-pills">
+                  <a class="nav-link" routerLink="/profile-details" >Orders</a>
+              </div>
+              <div class="nav flex-column nav-pills">
+                  <a class="nav-link" routerLink="/profile-details" >Downloads</a>
+              </div>
+              <div class="nav flex-column nav-pills">
+                  <a class="nav-link" routerLink="/profile-details" >Address</a>
+              </div> -->
+              <div class="nav flex-column nav-pills">
+                  <a class="nav-link active" routerLink="/profile-details" >Account</a>
+              </div>
+              <div class="nav flex-column nav-pills">
+                  <a class="nav-link"routerLink="/logout" >Log Out</a>
+              </div>
+          </div>
+  
+        <div class="col-12 col-md-7 col-sm-12 col-lg-9">
+        
+            
+  
+  
+  
+            <div class="tab-pane fade show active" id="settings" role="tabpanel" >
+              <div class="acccount-settings">
+                <h4 class="mb-4">Account information</h4>
+                <form action="#">
+                  <!-- <div class="form-row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label >First Name</label>
+                        <input type="text" class="form-control" placeholder="{{user.firstName}}" readonly>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label >Last Name</label>
+                        <input type="text" class="form-control" placeholder="{{user.lastName}}" readonly>
+                      </div>
+                    </div>
+                  </div> -->
+  
+                 
+                  <div class="form-group mb-4">
+                    <label >Your email address is : </label>
+                    <input type="text" class="form-control" placeholder="{{user.email}}" readonly>
+                  </div>
+                </form>
+  
+                <form [formGroup]="updateInfo" (ngSubmit)="onSubmitInfo()" class="mt-5">
+                  <h4>Update your information</h4>
+
+                  <div class="form-group">
+                    <label>Bio</label>
+                    <input type="text" class="form-control" placeholder="Bio" formControlName="bio">
+                </div>
+                <div class="form-group">
+                  <label>Phone</label>
+                  <input type="tel" class="form-control" placeholder="Phone" formControlName="phone" pattern="^(0|\+212)[0-9]{9,}$">
+              </div>
+              <button type="submit" class="btn btn-dark">Save Changes</button>
+                </form>
+
+                <!-- <form [formGroup]="updateForm" (ngSubmit)="onSubmit()" class="mt-5">
+                  <h4>Password change</h4>
+              
+                  <div class="form-group">
+                      <label>Current password</label>
+                      <input type="password" class="form-control" placeholder="your current password" formControlName="current_password">
+                      <div *ngIf="updateForm.get('current_password')?.invalid && updateForm.get('current_password')?.touched">
+                          <small class="form-text text-danger">Please enter your current password</small>
+                      </div>
+                  </div>
+              
+                  <div class="form-group">
+                      <label>New password</label>
+                      <input type="password" class="form-control" placeholder="New password" formControlName="password">
+                      <div *ngIf="updateForm.get('password')?.invalid && updateForm.get('password')?.touched">
+                          <small class="form-text text-danger">Please enter a new password</small>
+                      </div>
+                  </div>
+              
+                  <div class="form-group">
+                      <label>Confirm password</label>
+                      <input type="password" class="form-control" placeholder="Confirm password" formControlName="confirm">
+                      <div *ngIf="updateForm.get('confirm')?.invalid && updateForm.get('confirm')?.touched">
+                          <small class="form-text text-danger">Please confirm your new password</small>
+                      </div>
+                  </div>
+
+                  
+              
+                  <button type="submit" class="btn btn-dark">Save Changes</button>
+              </form> -->
+              
+              </div>
+            </div>
+  
+         
+        </div>
+      </div>
+    </div>
+  </section>

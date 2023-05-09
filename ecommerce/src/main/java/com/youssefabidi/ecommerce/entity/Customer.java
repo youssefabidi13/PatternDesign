@@ -1,14 +1,21 @@
     package com.youssefabidi.ecommerce.entity;
 
+    import com.fasterxml.jackson.annotation.JsonBackReference;
     import com.fasterxml.jackson.annotation.JsonIgnore;
+    import com.fasterxml.jackson.annotation.JsonManagedReference;
+    import com.fasterxml.jackson.annotation.JsonView;
+    import com.youssefabidi.ecommerce.iterator.IContainer;
+    import com.youssefabidi.ecommerce.iterator.IIterator;
+    import com.youssefabidi.ecommerce.iterator.OrderIterator;
     import jakarta.persistence.*;
+    import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
     import java.util.HashSet;
     import java.util.Set;
 
     @Entity
     @Table(name="customer")
-    public class Customer {
+    public class Customer implements IContainer{
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,13 +51,15 @@
         private String profilePhoto;
 
         @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+        @JsonManagedReference
         private Set<Order> orders = new HashSet<>();
 
 
         public void setPassword(String password) {
             this.password = password;
-            this.encryptedPassword = password;
-                    //new BCryptPasswordEncoder().encode(password);
+            this.encryptedPassword =
+                    //password;
+                    new BCryptPasswordEncoder().encode(password);
         }
 
         public String getEncryptedPassword() {
@@ -58,16 +67,25 @@
         }
         public Customer() {}
 
-
-
-
-
         public Set<Authority> getAuthorities() {
             return authorities;
         }
 
         public void setAuthorities(Set<Authority> authorities) {
             this.authorities = authorities;
+        }
+
+        public Long getId() {
+            return id;
+        }
+
+        @Override
+        public IIterator createIterator() {
+            return new OrderIterator(orders);
+        }
+
+        public Set<Order> getOrders() {
+            return orders;
         }
 
         public static class Builder {
@@ -191,22 +209,22 @@
         }
 
 
-        public void add(Order order){
-            if(order != null){
-                if (orders == null) {
-                    orders = new HashSet<>();
-                }
-                orders.add(order);
-                order.setCustomer(this);
-            }
-        }
-
-        public void remove(Order order){
-            if(order != null){
-                orders.remove(order);
-                order.setCustomer(null);
-            }
-        }
+//        public void add(Order order){
+//            if(order != null){
+//                if (orders == null) {
+//                    orders = new HashSet<>();
+//                }
+//                orders.add(order);
+//                order.setCustomer(this);
+//            }
+//        }
+//
+//        public void remove(Order order){
+//            if(order != null){
+//                orders.remove(order);
+//                order.setCustomer(null);
+//            }
+//        }
 
 
         public void setFirstName(String firstName) {

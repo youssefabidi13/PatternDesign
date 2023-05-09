@@ -25,7 +25,7 @@ public class ShopController {
 
     @GetMapping("/all")
     public List<Product> getAllProducts() {
-        List<Product> products = shopRepository.findAll();
+        List<Product> products = shopRepository.findByUnitsInStockNot(0);
         return products;
     }
     @GetMapping("/popular")
@@ -49,9 +49,9 @@ public class ShopController {
         return shopRepository.findById(id).get();
     }
 
-    @GetMapping("/{category}")
-    public Product getProductCategory(@PathVariable String category) {
-        return shopRepository.findByCategory(category).get();
+    @GetMapping("/categories/{category}")
+    public List<Product> getProductCategory(@PathVariable String category) {
+        return shopRepository.findByCategoryAndUnitsInStockNot(category,0);
     }
 
 }

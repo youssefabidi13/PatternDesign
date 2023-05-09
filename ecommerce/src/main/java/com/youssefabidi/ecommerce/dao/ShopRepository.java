@@ -15,6 +15,8 @@ public interface ShopRepository extends JpaRepository<Product, Long> {
     List<String> findAllDistinctCategories();
 
     Optional<Product> findById(@RequestParam("id") Long id);
-    Optional<Product> findByCategory(@RequestParam("category") String category);
+    List<Product> findByCategory(@RequestParam("category") String category);
+    List<Product> findByUnitsInStockNot(int unitsInStock);
+    List<Product> findByCategoryAndUnitsInStockNot(String category, int unitsInStock);
 
 }

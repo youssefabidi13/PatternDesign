@@ -39,7 +39,7 @@ public class Product {
     private BigDecimal unitPrice;
 
     @Column(name="sales_price")
-    private BigDecimal salesPrice;
+    private double salesPrice;
 
     @Column(name="active")
     private boolean active;

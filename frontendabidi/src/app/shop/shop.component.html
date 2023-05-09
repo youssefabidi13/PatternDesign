@@ -1,0 +1,39 @@
+<section class="section products-main">
+    <div class="container">
+          <div class="row justify-content-center">
+              <div class="col-lg-8">
+                  <div class="title text-center">
+                      <h2>New arrivals</h2>
+                      <p>The best Online sales to shop these weekend</p>
+                  </div>
+              </div>
+          </div>
+  
+  
+      <div class="row">
+        
+        <div class="col-lg-3 col-12 col-md-6 col-sm-6 mb-5" *ngFor="let product of products">
+            <div class="product">
+              <div class="product-wrap" >
+                  <a routerLink="/product-single/{{product.id}}"><img class="img-fluid w-100 mb-3 img-first" src="{{product.images && product.images[0]?.imageName}}" alt="{{product.name}}" /></a>
+                  <a routerLink="/product-single/{{product.id}}"><img class="img-fluid w-100 mb-3 img-second" src="{{product.images && product.images[1]?.imageName}}" alt="{{product.name}}" /></a>
+              </div>
+  
+              <span class="onsale">Sale</span>
+              <div class="product-hover-overlay">
+                <a (click)="addToCart(product)" ><i class="tf-ion-android-cart"></i></a>
+                <a href="#"><i class="tf-ion-ios-heart"></i></a>
+              </div>
+  
+              <div class="product-info">
+                  <h2 class="product-title h5 mb-0"><a href="/product-single/{{product.id}}">{{product.name}}</a></h2>
+                  <span class="price">
+                      {{product.salesPrice|currency:'USD'}}
+                  </span>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

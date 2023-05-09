@@ -1,15 +1,16 @@
 package com.youssefabidi.ecommerce.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.youssefabidi.ecommerce.strategy.TotalAmountOrder;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name="orders")
@@ -22,50 +23,44 @@ public class Order {
     @Column(name="id")
     private Long id;
 
-    @Column(name="order_tracking_number")
-    private String orderTrackingNumber;
-
-    @Column(name="total_quantity")
-    private int totalQuantity;
-
     @Column(name="total_price")
-    private BigDecimal totalPrice;
+    private Double totalPrice;
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 
-    @Column(name="status")
-    private String status;
-
+    @Column(name="quantity")
+    private int quantity;
     @Column(name="date_created")
     @CreationTimestamp
-    private Date dateCreated;
+    private LocalDateTime dateCreated;
 
     @Column(name="last_updated")
     @UpdateTimestamp
-    private Date lastUpdate;
-
-    @OneToMany(cascade = CascadeType.ALL , mappedBy = "order")
-    private Set<OrderItem> orderItems = new HashSet<>();
+    private LocalDateTime lastUpdate;
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
+    @JsonBackReference
     private Customer customer;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "shipping_address_id",referencedColumnName = "id")
-    private Address shippingAddress;
+    @Transient
+    @JsonIgnore
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "billing_address_id" , referencedColumnName = "id")
-    private Address billingAddress;
+    private TotalAmountOrder totalAmountOrder;
 
-    
-    public void add(OrderItem item){
-        if (item !=null ){
-            if (orderItems == null) {
-                orderItems = new HashSet<>();
-            }
-            orderItems.add(item);
-            item.setOrder(this);
-        }
+    public Order(TotalAmountOrder totalAmountOrder) {
+        this.totalAmountOrder = totalAmountOrder;
+    }
+
+    public double calculateTotalAmount(double price, int quantity) {
+        return totalAmountOrder.calculateTotalAmount(price, quantity);
+    }
+    public Order() {
+    }
+
+    public Double getTotalPrice() {
+        return totalPrice;
     }
 }
 

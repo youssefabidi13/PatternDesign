@@ -1,15 +1,22 @@
 package com.youssefabidi.ecommerce.controller;
 
 import com.youssefabidi.ecommerce.dao.AuthorityRepository;
+import com.youssefabidi.ecommerce.dto.CustomerDTO;
 import com.youssefabidi.ecommerce.entity.Authority;
 import com.youssefabidi.ecommerce.entity.Customer;
+import com.youssefabidi.ecommerce.entity.Order;
+import com.youssefabidi.ecommerce.iterator.IContainer;
+import com.youssefabidi.ecommerce.iterator.IIterator;
+import com.youssefabidi.ecommerce.iterator.OrderIterator;
 import com.youssefabidi.ecommerce.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -45,4 +52,40 @@ public class CustomerRestController {
 
         return new ResponseEntity<>(customer, HttpStatus.CREATED);
     }
+    @RequestMapping("/user")
+    public Customer getUserDetailsAfterLogin(Authentication authentication) {
+        Customer customers = customerService.findByEmail(authentication.getName());
+        System.out.println(customers);
+        return customers;
+
+    }
+    @PutMapping("/user/{id}")
+    public ResponseEntity<Customer> updateCustomer(@PathVariable("id") Long id, @RequestBody CustomerDTO customer) {
+        Customer existingCustomer = customerService.findById(id);
+        if (existingCustomer == null) {
+            return ResponseEntity.notFound().build();
+        }
+        existingCustomer.setBio(customer.getBio());
+        existingCustomer.setPhoneNumber(customer.getPhone());
+        Customer updatedCustomer = customerService.save(existingCustomer);
+        return ResponseEntity.ok(updatedCustomer);
+    }
+    @RequestMapping("/{username}")
+    public Long getUserIdByUsername(@PathVariable String username) {
+        return customerService.findIdByUsername(username);
+    }
+
+    @GetMapping("/customer/{id}")
+   public double getTotalAmountOrders(@PathVariable Long id) {
+        IContainer container = customerService.findById(id);
+        IIterator iterator = container.createIterator();
+        Double totalAmount = 0.0;
+        while (iterator.hasNext()){
+            Object object = iterator.next();
+            totalAmount+= ((Order) object).getTotalPrice();
+        }
+        return totalAmount;
+    }
+
+
 }

@@ -21,4 +21,16 @@ public class CustomerServiceImpl implements CustomerService{
     public Customer findByEmail(String email) {
         return customerRepository.findByEmail(email);
     }
+
+    @Override
+    @Transactional
+    public Customer findById(Long id) {
+    return customerRepository.findById(id).get();
+    }
+
+    @Override
+    @Transactional
+    public Long findIdByUsername(String username) {
+        return customerRepository.findIdByUsername(username);
+    }
 }
