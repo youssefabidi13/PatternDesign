@@ -1,9 +1,8 @@
     package com.youssefabidi.ecommerce.entity;
 
-    import com.fasterxml.jackson.annotation.JsonBackReference;
     import com.fasterxml.jackson.annotation.JsonIgnore;
     import com.fasterxml.jackson.annotation.JsonManagedReference;
-    import com.fasterxml.jackson.annotation.JsonView;
+    import com.youssefabidi.ecommerce.builder.Builder;
     import com.youssefabidi.ecommerce.iterator.IContainer;
     import com.youssefabidi.ecommerce.iterator.IIterator;
     import com.youssefabidi.ecommerce.iterator.OrderIterator;
@@ -87,146 +86,6 @@
         public Set<Order> getOrders() {
             return orders;
         }
-
-        public static class Builder {
-            //private Long id;
-            private String firstName;
-            private String lastName;
-            private String email;
-            private String bio;
-            private String phoneNumber;
-            private String profilePhoto;
-
-            private String password;
-
-            private Set<Order> orders;
-            private String role;
-
-            private Set<Authority> authorities;
-
-            public Builder() {}
-
-
-
-            public Builder password(String password) {
-                this.password = password;
-                return this;
-            }
-            public Builder firstName(String firstName) {
-                this.firstName = firstName;
-                return this;
-            }
-
-            public Builder lastName(String lastName) {
-                this.lastName = lastName;
-                return this;
-            }
-
-            public Builder email(String email) {
-                this.email = email;
-                return this;
-            }
-
-            public Builder bio(String bio) {
-                this.bio = bio;
-                return this;
-            }
-
-            public Builder phoneNumber(String phoneNumber) {
-                this.phoneNumber = phoneNumber;
-                return this;
-            }
-
-            public Builder profilePhoto(String profilePhoto) {
-                this.profilePhoto = profilePhoto;
-                return this;
-            }
-
-            public Builder orders(Set<Order> orders) {
-                this.orders = orders;
-                return this;
-            }
-
-
-            public Builder authorities(Set<Authority> authorities) {
-                this.authorities = authorities;
-                        //new HashSet<>(authorities);
-                //this.authorities.add(new Authority("ROLE_USER",this.build()));
-                return this;
-            }
-
-
-            public Customer build() {
-                Customer customer = new Customer();
-               // customer.setId(id);
-                customer.setFirstName(firstName);
-                customer.setLastName(lastName);
-                customer.setEmail(email);
-                customer.setBio(bio);
-                customer.setPhoneNumber(phoneNumber);
-                customer.setProfilePhoto(profilePhoto);
-                customer.setOrders(orders);
-                customer.setPassword(password);
-                customer.setAuthorities(authorities);
-                return customer;
-            }
-
-            public String getEmail() {
-                return email;
-            }
-
-            public String getFirstName() {
-                return firstName;
-            }
-
-            public String getLastName() {
-                return lastName;
-            }
-
-            public String getBio() {
-                return bio;
-            }
-
-            public String getPhoneNumber() {
-                return phoneNumber;
-            }
-
-            public String getProfilePhoto() {
-                return profilePhoto;
-            }
-
-            public String getPassword() {
-                return password;
-            }
-
-            public Set<Order> getOrders() {
-                return orders;
-            }
-
-            public Set<Authority> getAuthorities() {
-                return authorities;
-            }
-        }
-
-
-//        public void add(Order order){
-//            if(order != null){
-//                if (orders == null) {
-//                    orders = new HashSet<>();
-//                }
-//                orders.add(order);
-//                order.setCustomer(this);
-//            }
-//        }
-//
-//        public void remove(Order order){
-//            if(order != null){
-//                orders.remove(order);
-//                order.setCustomer(null);
-//            }
-//        }
-
-
         public void setFirstName(String firstName) {
             this.firstName = firstName;
         }
