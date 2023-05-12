@@ -1,8 +1,5 @@
 package com.youssefabidi.ecommerce.dto;
 
-import com.youssefabidi.ecommerce.entity.Customer;
-import com.youssefabidi.ecommerce.entity.Product;
-
 public class OrderDto {
 
     private Long customerId;

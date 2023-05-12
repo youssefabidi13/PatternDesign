@@ -6,15 +6,15 @@ import com.youssefabidi.ecommerce.entity.Order;
 
 import java.util.Set;
 
-public interface Builder {
-    Builder firstName(String firstName);
-    Builder lastName(String lastName);
-    Builder email(String email);
-    Builder bio(String bio);
-    Builder phoneNumber(String phoneNumber);
-    Builder profilePhoto(String profilePhoto);
-    Builder password(String password);
-    Builder authorities(Set<Authority> authorities);
-    Builder orders(Set<Order> orders);
+public interface BuilderI {
+    BuilderI firstName(String firstName);
+    BuilderI lastName(String lastName);
+    BuilderI email(String email);
+    BuilderI bio(String bio);
+    BuilderI phoneNumber(String phoneNumber);
+    BuilderI profilePhoto(String profilePhoto);
+    BuilderI password(String password);
+    BuilderI authorities(Set<Authority> authorities);
+    BuilderI orders(Set<Order> orders);
     Customer build();
 }

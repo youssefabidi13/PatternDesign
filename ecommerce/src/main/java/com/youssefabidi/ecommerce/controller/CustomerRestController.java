@@ -1,5 +1,7 @@
 package com.youssefabidi.ecommerce.controller;
 
+import com.youssefabidi.ecommerce.builder.Builder;
+import com.youssefabidi.ecommerce.builder.CustomerDirector;
 import com.youssefabidi.ecommerce.dao.AuthorityRepository;
 import com.youssefabidi.ecommerce.dto.CustomerDTO;
 import com.youssefabidi.ecommerce.entity.Authority;
@@ -7,7 +9,6 @@ import com.youssefabidi.ecommerce.entity.Customer;
 import com.youssefabidi.ecommerce.entity.Order;
 import com.youssefabidi.ecommerce.iterator.IContainer;
 import com.youssefabidi.ecommerce.iterator.IIterator;
-import com.youssefabidi.ecommerce.iterator.OrderIterator;
 import com.youssefabidi.ecommerce.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +17,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -32,7 +32,7 @@ public class CustomerRestController {
     private AuthorityRepository authorityRepository;
 
     @PostMapping("/register")
-    public ResponseEntity<Customer> addCustomer(@RequestBody Customer.Builder customerBuilder) {
+    public ResponseEntity<Customer> addCustomer(@RequestBody Builder customerBuilder) {
         String email = customerBuilder.getEmail();
         String firstName = customerBuilder.getFirstName();
         String lastName = customerBuilder.getLastName();
@@ -43,8 +43,10 @@ public class CustomerRestController {
         if (existingCustomer != null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+        CustomerDirector director = new CustomerDirector(customerBuilder);
 
-        Customer customer = customerBuilder.build();
+        //Customer customer = customerBuilder.build();
+        Customer customer = director.construct();
         authorities.add(new Authority("ROLE_USER",customer));
         customerService.save(customer);
         authorityRepository.saveAll(authorities);

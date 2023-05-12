@@ -1,10 +1,7 @@
 package com.youssefabidi.ecommerce.controller;
 
-import com.youssefabidi.ecommerce.dao.ProductRepository;
 import com.youssefabidi.ecommerce.dao.ShopRepository;
-import com.youssefabidi.ecommerce.entity.Image;
 import com.youssefabidi.ecommerce.entity.Product;
-import com.youssefabidi.ecommerce.entity.Size;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

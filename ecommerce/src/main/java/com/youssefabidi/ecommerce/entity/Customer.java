@@ -2,7 +2,6 @@
 
     import com.fasterxml.jackson.annotation.JsonIgnore;
     import com.fasterxml.jackson.annotation.JsonManagedReference;
-    import com.youssefabidi.ecommerce.builder.Builder;
     import com.youssefabidi.ecommerce.iterator.IContainer;
     import com.youssefabidi.ecommerce.iterator.IIterator;
     import com.youssefabidi.ecommerce.iterator.OrderIterator;

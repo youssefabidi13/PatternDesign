@@ -27,7 +27,7 @@ export class HeaderComponent {
         this.orders = orders;
         console.log(this.orders);
       },
-      error => console.log(error)
+      // error => console.log(error)
     );
     this.cartService.getTotalAmount(this.user.id!).subscribe(
       total => {
